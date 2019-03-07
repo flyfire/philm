@@ -1,10 +1,10 @@
 buildscript {
     repositories {
-        mavenCentral()
-
+        google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.3.0'
     }
 }
 
@@ -16,7 +16,6 @@ repositories {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "24.0.2"
 
     defaultConfig {
         minSdkVersion 14

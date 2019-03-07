@@ -1,14 +1,16 @@
 buildscript {
     repositories {
-        mavenCentral()
+        google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.3.0'
     }
 }
 apply plugin: 'com.android.application'
 
 repositories {
+    google()
     jcenter()
 }
 
@@ -23,13 +25,12 @@ def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "24.0.2"
 
     defaultConfig {
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         minSdkVersion 15
-        targetSdkVersion 21
+        targetSdkVersion 25
 
         buildConfigField "String", "BUILD_TIME", "\"${buildTime()}\""
     }
@@ -61,9 +62,14 @@ android {
         }
     }
 
+    flavorDimensions "version"
     productFlavors {
-        defaultFlavor {
-            proguardFile 'proguard-rules.txt'
+        demo {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // This property is optional if you are using only one dimension.
+            dimension "version"
+            applicationIdSuffix ".demo"
+            versionNameSuffix "-demo"
         }
     }
 
